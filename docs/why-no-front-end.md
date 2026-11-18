@@ -1,24 +1,7 @@
-# Why there is no front end
+# Why this festival desk has no front end
 
-Eventival is a database with a subscription. The tables underneath it are ordinary: a few entities, a few relationships, a handful of workflows you repeat every week. What you pay for is the layer on top that lets people who do not write SQL get at those tables. Screens, filters, dashboards, forms.
+The programme office spends its week resolving missing copies, comparing selection reviews, correcting screening times and preparing briefs. Those are records and decisions a coding agent can manage through one CLI. The database is the product. Read-only HTML gives the team a programme view, copy-traffic view and guest-control view, plus projection sheets, itineraries and selection minutes.
 
-That layer used to be the whole product, because talking to a database was hard. It is not hard any more. Open this folder in Claude Code, describe what you want, and it writes the query, runs it, and explains the answer. Ask a question the dashboard never had a chart for and you still get an answer.
+A live festival portal offers simultaneous browser editing, drag-and-drop scheduling, public submissions, mobile check-in and direct ticketing connections. This base provides none of those screens. It does not play or host films, sell tickets or accept payments. Its useful scope is the internal programme office. Enterprise DNA builds the agreed screens and connections for an installed version.
 
-## What you gain
-
-- **Better answers.** A dashboard shows what the vendor decided to chart. Here you ask your own question, in your own words, and get it answered against your own data.
-- **No seats.** Everyone who needs to look can look. The bill does not grow with headcount.
-- **Your data in your Postgres.** Plain tables. Back them up, query them from anything, leave any time. There is no export step because there is nothing to leave.
-- **A process that matches you.** When your way of working changes, you add a command. You do not wait for a feature request to clear.
-
-## What you give up
-
-- **A visual board.** Stages are a table you ask about, not cards you drag.
-- **A phone app.** It runs where Claude Code runs.
-- **A vendor help desk.** This is open source. Enterprise DNA supports the installed version for businesses that want someone to call.
-
-## Who this fits
-
-Small teams who already use Claude Code, or who would rather learn to ask than learn another interface. If your team needs a screen to look at all day, keep Eventival. If you need the answers more than the screens, this is cheaper, faster and yours.
-
-Installed and run for you: https://enterprisedna.co/omni/instead-of/eventival
+The free desk needs a trusted operator and local or managed database access. Never expose the database owner connection to a public visitor. Reports are snapshots: regenerate them after changing records, and check the live CLI before acting. A plan on paper does not prove the projector, rights or people are ready.

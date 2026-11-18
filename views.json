@@ -1,13 +1,48 @@
 [
   {
-    "name": "week",
-    "title": "This week",
-    "subtitle": "Film Festival for Claude Code: what needs attention, rendered by npm run view",
+    "name": "programme",
+    "title": "Programme readiness",
+    "subtitle": "Internal working schedule. Sign-off checks recorded evidence; it is not permission to exhibit.",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Screenings",
+        "sql": "select code,film,venue,local_start,timezone,readiness,array_to_string(blockers,'; ') as issues from v_release order by starts,code"
+      },
+      {
+        "title": "Room conflicts",
+        "sql": "select code,venue,conflicts_with,reason from v_conflicts order by code"
+      }
+    ]
+  },
+  {
+    "name": "selection-and-copies",
+    "title": "Selection and copy traffic",
+    "sections": [
+      {
+        "title": "Selection meeting",
+        "sql": "select code,name,owner,status,reviews,average_score,screenings from v_selection order by code"
+      },
+      {
+        "title": "Copy traffic",
+        "sql": "select code,name,owner,due,format,attention from v_delivery order by due nulls first,code"
+      }
+    ]
+  },
+  {
+    "name": "guest-controls",
+    "title": "Guest desk and control exceptions",
+    "sections": [
+      {
+        "title": "Guests",
+        "sql": "select code,name,purpose,review_due from guests order by code"
+      },
+      {
+        "title": "Conflicting commitments",
+        "sql": "select * from v_guest_conflicts order by code"
+      },
+      {
+        "title": "Recorded control gaps",
+        "sql": "select * from v_compliance order by record,rule"
       }
     ]
   }

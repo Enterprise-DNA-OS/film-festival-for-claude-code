@@ -1,11 +1,55 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "screening-sheet",
+    "title": "Internal screening sheet",
+    "for_each": "select id,code as name from screenings where not cancelled order by starts",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Projection brief",
+        "layout": "record",
+        "sql": "select code,film,venue,local_start,timezone,minutes,qa_minutes,readiness,array_to_string(blockers,'; ') as issues from v_release where id=$1"
+      },
+      {
+        "title": "Recorded exhibition conditions",
+        "sql": "select c.jurisdiction,c.rights_from,c.rights_to,c.rights_evidence,c.classification_route,c.classification_label,c.classification_evidence,c.conditions from screenings s join clearances c on c.film_id=s.film_id where s.id=$1",
+        "note": "Check the actual licence, classification decision and local rules. This sheet grants no rights."
+      }
+    ]
+  },
+  {
+    "name": "guest-itinerary",
+    "title": "Private guest itinerary",
+    "for_each": "select id,name from guests order by code",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Purpose and sharing review",
+        "layout": "record",
+        "sql": "select name,purpose,disclosure_basis,review_due from guests where id=$1",
+        "note": "Draft for the named guest and authorised coordinator only. Nothing is sent."
+      },
+      {
+        "title": "Travel and commitments",
+        "sql": "select name,starts,ends,location,status from visits where guest_id=$1 and status<>'cancelled' order by starts",
+        "note": "Times in this itinerary are UTC. Convert to the destination timezone before sharing."
+      }
+    ]
+  },
+  {
+    "name": "selection-record",
+    "title": "Selection meeting record",
+    "for_each": "select id,name from editions order by code",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Films and scores",
+        "sql": "select s.code,s.name,s.status,s.reviews,s.average_score,s.screenings from v_selection s join films f on f.id=s.id where f.edition_id=$1 order by s.code"
+      },
+      {
+        "title": "Recorded reasons",
+        "sql": "select f.code,n.actor,n.body,n.created_at from notes n join films f on f.id=n.film_id where f.edition_id=$1 order by n.created_at,n.id"
+      }
     ]
   }
 ]

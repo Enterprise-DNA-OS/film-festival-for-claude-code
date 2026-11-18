@@ -1,43 +1,62 @@
 # Film Festival for Claude Code: operating instructions
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+Read README.md, docs/cli.md and docs/compliance.md before changing records. Establish the business, edition, jurisdiction and operator context before using real data.
 
-## Who this is for
+## Working rules
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Read current records before advising. Use the one CLI, show actual results and resolve ambiguous names from the candidate list. Actor labels record attribution, not authenticated identity. Never invent a review, a licence, a classification or a projection check. Source documents remain the authority.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+## Recurring work
 
-## How to work
-
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
-
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
+| Job | Recipe |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| List festival editions | /editions |
+| List films and selection progress | /films |
+| Read a film and its full evidence | /film-review |
+| Review scores and unreviewed submissions | /selection-meeting |
+| Read screening times and readiness | /screening-schedule |
+| Find room and turnaround conflicts | /venue-conflicts |
+| Review projection-copy deliveries | /copy-traffic |
+| Read rights and classification records | /rights-desk |
+| List guest purposes and review dates | /guest-desk |
+| Read a guest itinerary | /guest-itinerary |
+| Find overlapping guest commitments | /guest-conflicts |
+| Find blocked screenings, overdue copies and quiet films | /attention |
+| Check recorded exhibition and guest controls | /compliance |
+| Combine selection, schedule readiness and copy traffic | /weekly-review |
+| Answer ten cross-festival questions | /insights |
+| Read the change history | /activity |
+| Export all business records and history | /export |
+| Draft a film evidence chase locally | /draft-chase |
+| Register an edition | /add-edition |
+| Add a film submission | /add-film |
+| Correct film details | /edit-film |
+| Append a selector review | /review |
+| Record a selection decision | /select |
+| Register a projection venue | /add-venue |
+| Record rights and classification evidence | /clearance |
+| Request a projection copy | /request-copy |
+| Record a copy receipt | /receive-copy |
+| Record a projection check | /check-copy |
+| Plan a screening | /schedule |
+| Change screening timing | /reschedule |
+| Cancel a screening | /cancel |
+| Sign off a clear screening as an independent reviewer | /sign-off |
+| Register a guest and disclosure purpose | /add-guest |
+| Review guest information use | /review-guest |
+| Add a guest commitment | /add-visit |
+| Confirm or cancel a guest commitment | /set-visit |
+| Append a film note | /log |
+| Import an Eventival spreadsheet export with an explicit column map | /import |
+| Add a field or rule | /customise |
+| Add a read-only report | /new-view |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+Recipes live only in .claude/commands. CLAUDE.md and AGENTS.md serve the same database and commands.
 
-## Hard rules
+## Boundaries
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
+Drafts stay in drafts. No messages, public programme publication, payments, ticketing or video delivery. Local HTML is an internal document, never an invitation to share guest details. Keep real records, credentials and exports out of Git. Review licence conditions and the applicable classification process with the responsible operator; software cannot grant exhibition permission.
 
-## Where things live
+Changes use numbered migrations and pass npm test. Do not rewrite an applied migration. Preserve imported source rows and append-only audit evidence. Do not seed a real workspace. Authorised code changes stay on main with the trailer Agent: omni-rebuild-strategist.
 
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Eventival.
-
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/eventival
+For shared operation, configure authenticated access, least-privilege roles, backups, recovery and agreed retention. The free base is a trusted operator workspace. A database owner bypasses row security.
